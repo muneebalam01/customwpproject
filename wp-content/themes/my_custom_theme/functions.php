@@ -305,18 +305,24 @@ function themedomain_post_if_submitted() {
     if ( !isset($_POST['title']) ) {
         return;
     }
-
+	// $categories = $_POST['category'] ;
     // Add the content of the form to $post as an array
+	$post_category = isset($_POST['category']) ? (int) $_POST['category'] : 0;
     $post = array(
         'post_title'    => $_POST['title'],
         'post_content'  => $_POST['content'],
-		'post_category' =>  array($_POST['category']),
+		// 'post_category' => array($_POST['category']),
+		// 'post_category' => explode(',', $categories),
+		// 'post_category' => array($category->term_id),
+		'post_category' => array($post_category),
         'tags_input'    => $_POST['post_tags'],
         'post_status'   => 'publish',   // Could be: publish
         'post_type' 	=> 'post' // Could be: 'page' or your CPT
+
     );
-	print_r($post) ; exit;
+	print_r($post_category) ; exit;
 	$post_id = wp_insert_post($post);
+	add_post_meta($post_id, 'meta_key', true);
 	
 	
 	// For Featured Image
@@ -340,32 +346,6 @@ function themedomain_post_if_submitted() {
     echo 'Saved your post successfully! :)';
 }
 
-// register meta box
-function meta_fields_add_meta_box(){
-	add_meta_box(
-		'meta_fields_meta_box', 
-		__( 'Book details' ), 
-		'meta_fields_build_meta_box_callback', 
-		'post',
-		'side',
-		'default'
-	 );
-}
 
-// build meta box
-function meta_fields_build_meta_box_callback( $post ){
-	  wp_nonce_field( 'meta_fields_save_meta_box_data', 'meta_fields_meta_box_nonce' );
-	  $title = get_post_meta( $post->ID, '_meta_fields_book_title', true );
-	  $author = get_post_meta( $post->ID, '_meta_fields_book_author', true );
-	  ?>
-	  <div class="inside">
-	  	  <p><strong>Title</strong></p>
-		  <p><input type="text" id="meta_fields_book_title" name="meta_fields_book_title" value="<?php echo esc_attr( $title ); ?>" /></p>	
-		  <p><strong>Author</strong></p>
-		  <p><input type="text" id="meta_fields_book_author" name="meta_fields_book_author" value="<?php echo esc_attr( $author ); ?>" /></p>
-	  </div>
-	  <?php
-}
-add_action( 'add_meta_boxes', 'meta_fields_add_meta_box' );
 
 
