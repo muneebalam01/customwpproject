@@ -284,7 +284,7 @@ add_action( 'init', 'create_bookcat_tax' );
             </p>
 
             <?php wp_editor( '', 'content' ); ?>
-            <?php  wp_dropdown_categories(array('taxonomy'=> 'bookcat',  'show_option_none'=> 'Select an option', 'hide_empty' => 0, 'name' => 'listofoptions', 'value_field' => 'slug' ));
+            <?php  wp_dropdown_categories(array('category'=> 'cat',  'show_option_none'=> 'Select an option', 'hide_empty' => 0, 'name' => 'listofoptions', 'value_field' => 'slug' ));
 			 ?>
             
 
@@ -310,13 +310,13 @@ function themedomain_post_if_submitted() {
     $post = array(
         'post_title'    => $_POST['title'],
         'post_content'  => $_POST['content'],
-        'tax_input' => array(
-					'bookcat' =>$_REQUEST['bookcat']
+        'category' => array(
+					'cat' =>$_REQUEST['cat']
 				),
        
         'tags_input'    => $_POST['post_tags'],
         'post_status'   => 'publish',   // Could be: publish
-        'post_type' 	=> 'book' // Could be: 'page' or your CPT
+        'post_type' 	=> 'post' // Could be: 'page' or your CPT
     );
 	$post_id = wp_insert_post($post);
 	
