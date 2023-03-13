@@ -231,11 +231,8 @@ function create_book_cpt() {
 		'capability_type' => 'post',
 	);
 	register_post_type( 'book', $args );
-
 }
 add_action( 'init', 'create_book_cpt', 0 );
-
-
 // Register Taxonomy bookcat
 function create_bookcat_tax() {
 
@@ -267,12 +264,8 @@ function create_bookcat_tax() {
 		'show_in_rest' => true,
 	);
 	register_taxonomy( 'bookcat', array('book'), $args );
-
 }
 add_action( 'init', 'create_bookcat_tax' );
-
-
-
 
  add_shortcode( 'themedomain_frontend_post', 'themedomain_frontend_post' );
     function themedomain_frontend_post() {
@@ -282,12 +275,9 @@ add_action( 'init', 'create_bookcat_tax' );
             <p><label for="title"><?php echo esc_html__('Title','theme-domain'); ?></label><br />
                 <input type="text" id="title" value="" tabindex="1" size="20" name="title" />
             </p>
-
             <?php wp_editor( '', 'content' ); ?>
             <?php  wp_dropdown_categories(array('category'=> 'category',  'show_option_none'=> 'Select an option', 'hide_empty' => 0, 'name' => 'listofoptions', 'value_field' => 'slug' ));
 			 ?>
-            
-
             <p><label for="post_tags"><?php echo esc_html__('Tags','theme-domain'); ?></label>
 
             <input type="text" value="" tabindex="5" size="16" name="post_tags" id="post_tags" /></p>
