@@ -20,8 +20,8 @@ get_header();
 				the_archive_description( '<div class="archive-description">', '</div>' );
 				?>
 			</header><!-- .page-header -->
-			<form action="<?php echo home_url( '//book/' ); ?>" method="get">
-	<label for="search">Search in <?php echo home_url( '//book/' ); ?></label>
+			<form action="<?php echo home_url( '/book/' ); ?>" method="get">
+	<label for="search">Search in <?php echo home_url( '/book/' ); ?></label>
 	<input type="text" name="s" id="search" value="<?php the_search_query(); ?>" />
 	<input type="image" alt="Search" src="<?php bloginfo( 'template_url' ); ?>/images/search.png" />
 </form>
