@@ -137,7 +137,7 @@ add_action( 'widgets_init', 'my_custom_theme_widgets_init' );
 /**
  * Enqueue scripts and styles.
  */
-function my_custom_theme_scripts() {
+function my_custom_theme_scripts() { 
 	wp_enqueue_style( 'my_custom_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'my_custom_theme-style', 'rtl', 'replace' );
 
