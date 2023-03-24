@@ -979,3 +979,8 @@ textarea {
     margin-left: 50px;
     margin-right: 50px;
 }
+
+li.product {
+    margin-right: 10px!important;
+    margin-left: 10px!important;
+}
