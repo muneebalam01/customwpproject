@@ -164,6 +164,9 @@ require get_template_directory() . '/inc/template-tags.php';
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+require get_template_directory() . '/inc/courses-cpt.php';
+require get_template_directory() . '/inc/course-metabox.php';
+
 
 /**
  * Customizer additions.
@@ -340,3 +343,13 @@ function themedomain_post_if_submitted() {
 
 
 
+add_action( 'template_redirect', 'my_custom_post_type_redirect' );
+function my_custom_post_type_redirect() {
+    if ( is_singular( 'courses' ) ) {
+        global $post;
+        $product_id = $post->ID;
+        $checkout_url = wc_get_checkout_url();
+        wp_redirect( $checkout_url . '?add-to-cart=' . $product_id );
+        exit;
+    }
+}
